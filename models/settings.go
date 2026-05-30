@@ -155,6 +155,17 @@ type Settings struct {
 		VacuumInterval string `json:"vacuum_cron_interval"`
 	} `json:"maintenance.db"`
 
+	SES struct {
+		Enabled         bool    `json:"enabled"`
+		Region          string  `json:"region"`
+		AccessKeyID     string  `json:"access_key_id"`
+		SecretAccessKey string  `json:"secret_access_key,omitempty"`
+		RoleARN         string  `json:"role_arn"`
+		ConfigSet       string  `json:"config_set"`
+		MaxMsgRetries   int     `json:"max_msg_retries"`
+		PricePerMessage float64 `json:"price_per_message"`
+	} `json:"ses"`
+
 	AdminCustomCSS  string `json:"appearance.admin.custom_css"`
 	AdminCustomJS   string `json:"appearance.admin.custom_js"`
 	PublicCustomCSS string `json:"appearance.public.custom_css"`

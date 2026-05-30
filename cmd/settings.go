@@ -79,6 +79,7 @@ func (a *App) GetSettings(c echo.Context) error {
 	s.BounceLettermint.Key = strings.Repeat(pwdMask, utf8.RuneCountInString(s.BounceLettermint.Key))
 	s.SecurityCaptcha.HCaptcha.Secret = strings.Repeat(pwdMask, utf8.RuneCountInString(s.SecurityCaptcha.HCaptcha.Secret))
 	s.OIDC.ClientSecret = strings.Repeat(pwdMask, utf8.RuneCountInString(s.OIDC.ClientSecret))
+	s.SES.SecretAccessKey = strings.Repeat(pwdMask, utf8.RuneCountInString(s.SES.SecretAccessKey))
 
 	return c.JSON(http.StatusOK, okResp{s})
 }
@@ -248,6 +249,9 @@ func (a *App) UpdateSettings(c echo.Context) error {
 	}
 	if set.OIDC.ClientSecret == "" {
 		set.OIDC.ClientSecret = cur.OIDC.ClientSecret
+	}
+	if set.SES.SecretAccessKey == "" {
+		set.SES.SecretAccessKey = cur.SES.SecretAccessKey
 	}
 
 	// OIDC user auto-creation is enabled. Validate.
